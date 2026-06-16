@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen bg-background text-foreground">
-    <div class="max-w-4xl mx-auto grid grid-cols-2 gap-4">
-
+  <div class="text-foreground">
+    <!-- <div class="max-w-4xl mx-auto grid grid-cols-2 gap-4"> -->
+    <div class="grid grid-cols-2 gap-4 items-stretch">
       <!-- LEFT: Room Safety Index -->
       <div class="bg-card border border-border rounded-xl p-6 space-y-6">
         <h2 class="text-xs font-semibold tracking-widest text-muted-foreground uppercase">

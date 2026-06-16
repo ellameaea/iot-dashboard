@@ -29,18 +29,20 @@ import {
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler)
 
 const SUPABASE_URL = "https://kjgkzryfefbhojrqzvhh.supabase.co"
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqZ2t6cnlmZWZiaG9qcnF6dmhoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0MjYwOTcsImV4cCI6MjA5NzAwMjA5N30.eDHyhA9voXdB9o3h5xlFjIhgsYc52NLsw3GWpqUaVbU" // <-- Paste your actual key here
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqZ2t6cnlmZWZiaG9qcnF6dmhoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0MjYwOTcsImV4cCI6MjA5NzAwMjA5N30.eDHyhA9voXdB9o3h5xlFjIhgsYc52NLsw3GWpqUaVbU"
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 const isLoading = ref<boolean>(true)
 
-// FIX 1: Use shallowRef instead of ref to stop Vue's deep proxy memory leak loop!
 const chartData = shallowRef<any>({ labels: [], datasets: [] })
+
+// Convert moisture string to plottable number
+const moistureToNum = (val: string) => val?.toLowerCase() === 'wet' ? 1 : 0
 
 const chartOptions = {
   responsive: true,
   maintainAspectRatio: false,
-  animation: false, // Turn off heavy animations for quick real-time ticks
+  animation: false,
   scales: {
     y: {
       grid: { color: 'rgba(255, 255, 255, 0.05)' },
@@ -49,15 +51,53 @@ const chartOptions = {
     x: {
       grid: { display: false },
       ticks: { display: false }
-      // ticks: { color: '#94a3b8', maxTicksLimit: 8 }
     }
   },
   plugins: {
-    legend: { labels: { color: '#f8fafc', font: { size: 12 } } }
+    legend: { labels: { color: '#f8fafc', font: { size: 12 } } },
+    tooltip: {
+      callbacks: {
+        label: (ctx: any) => {
+          if (ctx.dataset.label.includes('Moisture')) {
+            return ` Moisture: ${ctx.raw === 1 ? 'Wet' : 'Dry'}`
+          }
+          return ` ${ctx.dataset.label}: ${ctx.raw}`
+        }
+      }
+    }
   }
 } as any
 
-// Historical logs initial fetch
+const emptyDatasets = () => [
+  {
+    label: 'Temperature (°C)',
+    data: [] as number[],
+    borderColor: '#3b82f6',
+    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+    tension: 0.2,
+    pointRadius: 2,
+    fill: true
+  },
+  {
+    label: 'Gas (ppm)',
+    data: [] as number[],
+    borderColor: '#f97316',
+    backgroundColor: 'rgba(249, 115, 22, 0.1)',
+    tension: 0.2,
+    pointRadius: 2,
+    fill: true
+  },
+  {
+    label: 'Moisture (0=Dry, 1=Wet)',
+    data: [] as number[],
+    borderColor: '#06b6d4',
+    backgroundColor: 'rgba(6, 182, 212, 0.1)',
+    tension: 0.2,
+    pointRadius: 2,
+    fill: true
+  }
+]
+
 const fetchHistoricalLogs = async () => {
   try {
     const { data, error } = await supabase
@@ -66,47 +106,45 @@ const fetchHistoricalLogs = async () => {
       .order('created_at', { ascending: true })
       .limit(50)
 
-    if (error) {
-      console.error('Historical logs data table fetch failed:', error.message)
-      return
-    }
+    if (error) { console.error('Historical logs fetch failed:', error.message); return }
 
     if (data && data.length > 0) {
-      const times = data.map((row: any) => {
-        const d = new Date(row.created_at)
-        return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      const labels: string[] = []
+      const tempData: number[] = []
+      const gasData: number[] = []
+      const moistData: number[] = []
+
+      // Group by timestamp — each row is one sensor reading
+      data.forEach((row: any) => {
+        const time = new Date(row.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+
+        if (row.topic === 'sensors/temperature') {
+          labels.push(time)
+          tempData.push(Number(row.value))
+          gasData.push(gasData[gasData.length - 1] ?? 0)
+          moistData.push(moistData[moistData.length - 1] ?? 0)
+        } else if (row.topic === 'sensors/gas') {
+          labels.push(time)
+          gasData.push(Number(row.value))
+          tempData.push(tempData[tempData.length - 1] ?? 0)
+          moistData.push(moistData[moistData.length - 1] ?? 0)
+        } else if (row.topic === 'sensors/moisture') {
+          labels.push(time)
+          moistData.push(moistureToNum(row.value))
+          tempData.push(tempData[tempData.length - 1] ?? 0)
+          gasData.push(gasData[gasData.length - 1] ?? 0)
+        }
       })
 
-      // Adjusting data mapping logic to handle your table's single-value topic structure
-      const tempValues = data.filter((row: any) => row.topic === 'sensors/temp' || row.id === 'temperature').map((row: any) => row.value)
-      const humValues = data.filter((row: any) => row.topic === 'sensors/humidity' || row.id === 'humidity').map((row: any) => row.value)
+      const ds = emptyDatasets()
+      ds[0].data = tempData
+      ds[1].data = gasData
+      ds[2].data = moistData
 
-      chartData.value = {
-        labels: times.slice(0, Math.max(tempValues.length, humValues.length)),
-        datasets: [
-          {
-            label: 'Temperature (°C)',
-            data: tempValues,
-            borderColor: '#3b82f6',
-            backgroundColor: 'rgba(59, 130, 246, 0.1)',
-            tension: 0.2,
-            pointRadius: 2,
-            fill: true
-          },
-          {
-            label: 'Humidity (%)',
-            data: humValues,
-            borderColor: '#06b6d4',
-            backgroundColor: 'rgba(6, 182, 212, 0.1)',
-            tension: 0.2,
-            pointRadius: 2,
-            fill: true
-          }
-        ]
-      }
+      chartData.value = { labels, datasets: ds }
     }
   } catch (err) {
-    console.error('Chart tracking connection run error:', err)
+    console.error('Chart fetch error:', err)
   } finally {
     isLoading.value = false
   }
@@ -122,46 +160,44 @@ const startLiveGraphSync = () => {
       { event: 'INSERT', schema: 'public', table: 'sensor_logs' },
       (payload: any) => {
         const newLog = payload.new
-        console.log('New database logging point appended to graph views:', newLog)
-        
         const d = new Date(newLog.created_at)
         const timeLabel = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-        
-        // Clone the arrays safely outside of reactive proxies
-        const nextLabels = [...chartData.value.labels]
-        const nextTempData = [...chartData.value.datasets[0].data]
-        const nextHumData = [...chartData.value.datasets[1].data]
 
-        // Add timestamps to labels
+        const nextLabels  = [...chartData.value.labels]
+        const nextTemp    = [...chartData.value.datasets[0].data]
+        const nextGas     = [...chartData.value.datasets[1].data]
+        const nextMoist   = [...chartData.value.datasets[2].data]
+
         nextLabels.push(timeLabel)
 
-        // Parse metrics dynamically depending on the telemetry topic line structure
-        if (newLog.topic === 'sensors/temp' || newLog.id === 'temperature') {
-          nextTempData.push(Number(newLog.value))
-          // Pad the opposite array so our dataset arrays keep perfectly matching lengths
-          if (nextHumData.length < nextTempData.length) {
-            nextHumData.push(nextHumData[nextHumData.length - 1] || 0)
-          }
-        } else if (newLog.topic === 'sensors/humidity' || newLog.id === 'humidity') {
-          nextHumData.push(Number(newLog.value))
-          if (nextTempData.length < nextHumData.length) {
-            nextTempData.push(nextTempData[nextTempData.length - 1] || 0)
-          }
+        if (newLog.topic === 'sensors/temperature') {
+          nextTemp.push(Number(newLog.value))
+          nextGas.push(nextGas[nextGas.length - 1] ?? 0)
+          nextMoist.push(nextMoist[nextMoist.length - 1] ?? 0)
+        } else if (newLog.topic === 'sensors/gas') {
+          nextGas.push(Number(newLog.value))
+          nextTemp.push(nextTemp[nextTemp.length - 1] ?? 0)
+          nextMoist.push(nextMoist[nextMoist.length - 1] ?? 0)
+        } else if (newLog.topic === 'sensors/moisture') {
+          nextMoist.push(moistureToNum(newLog.value))
+          nextTemp.push(nextTemp[nextTemp.length - 1] ?? 0)
+          nextGas.push(nextGas[nextGas.length - 1] ?? 0)
         }
 
-        // Cap array size limits cleanly
+        // Cap at 30 points
         if (nextLabels.length > 30) {
           nextLabels.shift()
-          nextTempData.shift()
-          nextHumData.shift()
+          nextTemp.shift()
+          nextGas.shift()
+          nextMoist.shift()
         }
 
-        // FIX 2: Trigger root-level reassignment so shallowRef fires a clean UI redraw!
         chartData.value = {
           labels: nextLabels,
           datasets: [
-            { ...chartData.value.datasets[0], data: nextTempData },
-            { ...chartData.value.datasets[1], data: nextHumData }
+            { ...chartData.value.datasets[0], data: nextTemp  },
+            { ...chartData.value.datasets[1], data: nextGas   },
+            { ...chartData.value.datasets[2], data: nextMoist },
           ]
         }
       }
@@ -169,14 +205,6 @@ const startLiveGraphSync = () => {
     .subscribe()
 }
 
-onMounted(() => {
-  fetchHistoricalLogs()
-  startLiveGraphSync()
-})
-
-onUnmounted(() => {
-  if (logsChannel) {
-    supabase.removeChannel(logsChannel)
-  }
-})
+onMounted(() => { fetchHistoricalLogs(); startLiveGraphSync() })
+onUnmounted(() => { if (logsChannel) supabase.removeChannel(logsChannel) })
 </script>

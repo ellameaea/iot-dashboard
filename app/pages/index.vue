@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-background text-foreground">
     <DashboardHeader :active-tab="activeTab" @update-tab="activeTab = $event" />
 
-    <main v-if="activeTab === 'dashboard'" class="p-6 space-y-6 max-w-full mx-auto">
+    <main v-if="activeTab === 'dashboard'" class="p-6 space-y-6 max-w-full mx-auto pb-0">
 
       <!-- Room Selector Bar -->
       <div
@@ -53,6 +53,7 @@
           />
         </div>
       </div>
+       <TimeSeriesChart />
     </main>
 
     <main v-else class="p-6 max-w-4xl mx-auto">
@@ -78,6 +79,7 @@ import SafetyView from '../components/SafetyView.vue'
 import AlertBanner from '../components/AlertBanner.vue'
 import AlertTable from '../components/AlertTable.vue'
 import DashboardHeader from '../components/DashboardHeader.vue'
+import TimeSeriesChart from '../components/TimeSeriesChart.vue'
 
 const activeTab = ref<'dashboard' | 'about'>('dashboard')
 const selectedRoom = ref<'a' | 'b' | 'c'>('a')
