@@ -1,0 +1,14 @@
+allowBuilds:
+  '@firebase/util': set this to true or false
+  '@parcel/watcher': set this to true or false
+  esbuild: set this to true or false
+  protobufjs: set this to true or false
+  sharp: set this to true or false
+  vue-demi: set this to true or false
+minimumReleaseAgeExclude:
+  - '@supabase/auth-js@2.108.2'
+  - '@supabase/functions-js@2.108.2'
+  - '@supabase/postgrest-js@2.108.2'
+  - '@supabase/realtime-js@2.108.2'
+  - '@supabase/storage-js@2.108.2'
+  - '@supabase/supabase-js@2.108.2'

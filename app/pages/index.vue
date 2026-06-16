@@ -57,10 +57,10 @@
 
     <main v-else class="p-6 max-w-4xl mx-auto">
       <div class="bg-card rounded-lg p-8 border border-border">
-        <h2 class="text-3xl font-bold mb-4">About IoT Dashboard</h2>
+        <h2 class="text-3xl font-bold mb-4">About QuakeTrace</h2>
         <p class="text-muted-foreground mb-4">
-          This is a professional IoT monitoring dashboard designed to provide real-time insights
-          into your connected devices and sensors.
+          The project focuses on post-earthquake disaster preparedness and emergency response. The system DOES NOT detect earthquakes directly. 
+          Instead, it monitors secondary hazards commonly encountered after earthquakes such as gas leaks, smoke hazards, water leaks, unsafe environmental conditions, and possible trapped occupants.
         </p>
         <div class="space-y-4 text-muted-foreground">
           <p><strong class="text-foreground">Real-time Monitoring:</strong> Track multiple sensors in real-time.</p>

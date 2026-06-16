@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <div class="bg-card border border-border rounded-lg p-8 h-55">
+    <div class="bg-card border border-border rounded-lg p-10 h-63">
       <div class="flex items-start justify-between mb-8">
         <div class="p-2 bg-blue-500/20 rounded-lg">
           <UIcon name="i-lucide-thermometer" class="w-5 h-5 text-blue-400" />
@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <div class="bg-card border border-border rounded-lg p-8 h-55">
+    <div class="bg-card border border-border rounded-lg p-10 h-63">
       <div class="flex items-start justify-between mb-8">
         <div class="p-2 bg-cyan-500/20 rounded-lg">
           <UIcon name="i-lucide-wind" class="w-5 h-5 text-cyan-400" />
@@ -37,7 +37,7 @@
       </div>
     </div>
 
-    <div class="bg-card border border-border rounded-lg p-8 h-55">
+    <div class="bg-card border border-border rounded-lg p-10 h-63">
       <div class="flex items-start justify-between mb-8">
         <div class="p-2 bg-amber-500/20 rounded-lg">
           <UIcon name="i-lucide-fan" class="w-5 h-5 text-amber-400" />
