@@ -4,8 +4,8 @@
 #include <DHT.h>
 
 // --- WiFi Credentials ---
-const char* ssid = "MRSP WIFI";         // Replace with your WiFi Name
-const char* password = "MRSP@NUMOA2026"; // Replace with your WiFi Password
+const char* ssid = "";         // Replace with your WiFi Name
+const char* password = ""; // Replace with your WiFi Password
 
 // --- HiveMQTT Credentials ---
 const char* mqtt_server = "92cb9acce1604fac9799f6d34d8770d6.s1.eu.hivemq.cloud";
