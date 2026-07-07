@@ -3,15 +3,7 @@
 #include <PubSubClient.h>
 #include <DHT.h>
 
-// --- WiFi Credentials ---
-const char* ssid = "";         // Replace with your WiFi Name
-const char* password = ""; // Replace with your WiFi Password
-
-// --- HiveMQTT Credentials ---
-const char* mqtt_server = "92cb9acce1604fac9799f6d34d8770d6.s1.eu.hivemq.cloud";
-const int mqtt_port = 8883;  
-const char* mqtt_user = "ellamae";
-const char* mqtt_password = "Ellamae2004";
+#include "secrets.h"
 
 // --- Pin Definitions ---
 #define DHTPIN 16         // Standard digital pin for DHT11
