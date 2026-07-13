@@ -3,51 +3,45 @@ import { Server } from 'node:http';
 import { resolve, dirname, join } from 'node:path';
 import nodeCrypto from 'node:crypto';
 import { parentPort, threadId } from 'node:worker_threads';
-import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, createError, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, appendResponseHeader, getRequestURL, getResponseHeader, removeResponseHeader, getResponseStatus, getQuery as getQuery$1, readBody, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getRouterParam, getResponseStatusText } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/h3@1.15.11/node_modules/h3/dist/index.mjs';
-import { escapeHtml } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/@vue+shared@3.5.38/node_modules/@vue/shared/dist/shared.cjs.js';
-import viteNodeEntry_mjs from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/@nuxt+vite-builder@4.4.8_@b_26fe45ab984c442cef0b744a8cf1369f/node_modules/@nuxt/vite-builder/dist/vite-node-entry.mjs';
-import { viteNodeFetch } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/@nuxt+vite-builder@4.4.8_@b_26fe45ab984c442cef0b744a8cf1369f/node_modules/@nuxt/vite-builder/dist/vite-node.mjs';
-import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/vue-bundle-renderer@2.2.0/node_modules/vue-bundle-renderer/dist/runtime.mjs';
-import { parseURL, withoutBase, joinURL, getQuery, withQuery, withTrailingSlash, decodePath, withLeadingSlash, withoutTrailingSlash, joinRelativeURL, encodePath } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/ufo@1.6.4/node_modules/ufo/dist/index.mjs';
-import destr, { destr as destr$1 } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/destr@2.0.5/node_modules/destr/dist/index.mjs';
-import { renderToString } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/vue@3.5.38_typescript@5.7.3/node_modules/vue/server-renderer/index.mjs';
-import { klona } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/klona@2.0.6/node_modules/klona/dist/index.mjs';
-import { defuFn } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/defu/dist/defu.mjs';
-import { snakeCase } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/scule@1.3.0/node_modules/scule/dist/index.mjs';
-import { createHead as createHead$1, propsToString, renderSSRHead } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/unhead@2.1.15/node_modules/unhead/dist/server.mjs';
-import { prefixStorage } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/unstorage@1.17.5_db0@0.3.4_ioredis@5.11.1/node_modules/unstorage/dist/index.mjs';
-import { createStorage } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/unstorage/dist/index.mjs';
-import unstorage_47drivers_47fs from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/unstorage/drivers/fs.mjs';
-import file_58_47_47_47C_58_47Users_47Ella_3720Mae_3720Lumawag_47Downloads_47io_45t_45dashboard_45ui_47node_modules_47_46pnpm_47_64nuxt_43nitro_45server_644_464_468__64b_bd6920173dded4f34c80a4563a54d0bc_47node_modules_47_64nuxt_47nitro_45server_47dist_47runtime_47utils_47cache_45driver_46js from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/@nuxt+nitro-server@4.4.8_@b_bd6920173dded4f34c80a4563a54d0bc/node_modules/@nuxt/nitro-server/dist/runtime/utils/cache-driver.js';
-import { stringify, uneval } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/devalue@5.8.1/node_modules/devalue/index.js';
-import { isVNode, isRef, toValue } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/vue@3.5.38_typescript@5.7.3/node_modules/vue/index.mjs';
-import { createHooks } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/hookable@5.5.3/node_modules/hookable/dist/index.mjs';
-import { createFetch, Headers as Headers$1 } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/ofetch@1.5.1/node_modules/ofetch/dist/node.mjs';
-import { fetchNodeRequestHandler, callNodeRequestHandler } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/node-mock-http@1.0.4/node_modules/node-mock-http/dist/index.mjs';
-import { digest, hash as hash$2 } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/ohash@2.0.11/node_modules/ohash/dist/index.mjs';
-import defu from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/defu@6.1.7/node_modules/defu/dist/defu.mjs';
-import { toRouteMatcher, createRouter } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/radix3@1.1.2/node_modules/radix3/dist/index.mjs';
+import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, createError, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, appendResponseHeader, getRequestURL, getResponseHeader, removeResponseHeader, getResponseStatus, getQuery as getQuery$1, readBody, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getRouterParam, getResponseStatusText } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/h3/dist/index.mjs';
+import { escapeHtml } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/@vue/shared/dist/shared.cjs.js';
+import viteNodeEntry_mjs from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/@nuxt/vite-builder/dist/vite-node-entry.mjs';
+import { viteNodeFetch } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/@nuxt/vite-builder/dist/vite-node.mjs';
+import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/vue-bundle-renderer/dist/runtime.mjs';
+import { parseURL, withoutBase, joinURL, getQuery, withQuery, withTrailingSlash, decodePath, withLeadingSlash, withoutTrailingSlash, joinRelativeURL, parseQuery, parsePath, encodePath } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/ufo/dist/index.mjs';
+import destr, { destr as destr$1 } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/destr/dist/index.mjs';
+import { renderToString } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/vue/server-renderer/index.mjs';
+import { klona } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/klona/dist/index.mjs';
+import defu, { defuFn } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/defu/dist/defu.mjs';
+import { snakeCase } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/scule/dist/index.mjs';
+import { createHead as createHead$1, propsToString, renderSSRHead } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/unhead/dist/server.mjs';
+import { createStorage, prefixStorage } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/unstorage/dist/index.mjs';
+import unstorage_47drivers_47fs from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/unstorage/drivers/fs.mjs';
+import file_58_47_47_47C_58_47Users_47paeng_47Desktop_47iot_45dashboard_47node_modules_47_64nuxt_47nitro_45server_47dist_47runtime_47utils_47cache_45driver_46js from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/@nuxt/nitro-server/dist/runtime/utils/cache-driver.js';
+import { stringify, uneval } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/devalue/index.js';
+import { isVNode, isRef, toValue } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/vue/index.mjs';
+import { createHooks } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/nitropack/node_modules/hookable/dist/index.mjs';
+import { createFetch, Headers as Headers$1 } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/ofetch/dist/node.mjs';
+import { fetchNodeRequestHandler, callNodeRequestHandler } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/node-mock-http/dist/index.mjs';
+import { digest, hash as hash$1 } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/ohash/dist/index.mjs';
+import { toRouteMatcher, createRouter } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/radix3/dist/index.mjs';
 import { readFile } from 'node:fs/promises';
-import consola, { consola as consola$1 } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/consola@3.4.2/node_modules/consola/dist/index.mjs';
-import { ErrorParser } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/youch-core@0.3.3/node_modules/youch-core/build/index.js';
-import { Youch } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/youch@4.1.1/node_modules/youch/build/index.js';
-import { SourceMapConsumer } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/source-map@0.7.6/node_modules/source-map/source-map.js';
+import consola, { consola as consola$1 } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/consola/dist/index.mjs';
+import { ErrorParser } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/youch-core/build/index.js';
+import { Youch } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/youch/build/index.js';
+import { SourceMapConsumer } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/source-map/source-map.js';
 import { AsyncLocalStorage } from 'node:async_hooks';
-import { getContext } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/unctx@2.5.0/node_modules/unctx/dist/index.mjs';
-import { captureRawStackTrace, parseRawStackTrace } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/errx@0.1.0/node_modules/errx/dist/index.js';
-import _wH6JrtIxmaSoA8lCPWFnE9z4lQeXW6H5z3l5aymEQw from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/@nuxt+vite-builder@4.4.8_@b_26fe45ab984c442cef0b744a8cf1369f/node_modules/@nuxt/vite-builder/dist/fix-stacktrace.mjs';
+import { getContext } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/unctx/dist/index.mjs';
+import { captureRawStackTrace, parseRawStackTrace } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/errx/dist/index.js';
+import _wH6JrtIxmaSoA8lCPWFnE9z4lQeXW6H5z3l5aymEQw from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/@nuxt/vite-builder/dist/fix-stacktrace.mjs';
 import { promises } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { dirname as dirname$1, resolve as resolve$1 } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/pathe/dist/index.mjs';
-import { getIcons } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/@iconify/utils/lib/index.js';
-import { hash as hash$1 } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/ohash/dist/index.mjs';
-import { createError as createError$1 } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/h3/dist/index.mjs';
-import { parseQuery, parsePath } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/ufo/dist/index.mjs';
-import { consola as consola$2 } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/consola/dist/index.mjs';
-import { collections } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/.nuxt/nuxt-icon-server-bundle.mjs';
-import { walkResolver } from 'file://C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/unhead@2.1.15/node_modules/unhead/dist/utils.mjs';
+import { dirname as dirname$1, resolve as resolve$1 } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/pathe/dist/index.mjs';
+import { getIcons } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/@iconify/utils/lib/index.js';
+import { collections } from 'file://C:/Users/paeng/Desktop/iot-dashboard/.nuxt/nuxt-icon-server-bundle.mjs';
+import { walkResolver } from 'file://C:/Users/paeng/Desktop/iot-dashboard/node_modules/unhead/dist/utils.mjs';
 
-const serverAssets = [{"baseName":"server","dir":"C:/Users/Ella Mae Lumawag/Downloads/io-t-dashboard-ui/server/assets"}];
+const serverAssets = [{"baseName":"server","dir":"C:/Users/paeng/Desktop/iot-dashboard/server/assets"}];
 
 const assets$1 = createStorage();
 
@@ -59,12 +53,12 @@ const storage = createStorage({});
 
 storage.mount('/assets', assets$1);
 
-storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"C:/Users/Ella Mae Lumawag/Downloads/io-t-dashboard-ui","watchOptions":{"ignored":[null]}}));
-storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"C:/Users/Ella Mae Lumawag/Downloads/io-t-dashboard-ui/server","watchOptions":{"ignored":[null]}}));
-storage.mount('cache:nuxt:payload', file_58_47_47_47C_58_47Users_47Ella_3720Mae_3720Lumawag_47Downloads_47io_45t_45dashboard_45ui_47node_modules_47_46pnpm_47_64nuxt_43nitro_45server_644_464_468__64b_bd6920173dded4f34c80a4563a54d0bc_47node_modules_47_64nuxt_47nitro_45server_47dist_47runtime_47utils_47cache_45driver_46js({"driver":"file:///C:/Users/Ella%20Mae%20Lumawag/Downloads/io-t-dashboard-ui/node_modules/.pnpm/@nuxt+nitro-server@4.4.8_@b_bd6920173dded4f34c80a4563a54d0bc/node_modules/@nuxt/nitro-server/dist/runtime/utils/cache-driver.js","base":"C:/Users/Ella Mae Lumawag/Downloads/io-t-dashboard-ui/.nuxt/cache/nuxt/payload"}));
-storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"C:/Users/Ella Mae Lumawag/Downloads/io-t-dashboard-ui/.nuxt"}));
-storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"C:/Users/Ella Mae Lumawag/Downloads/io-t-dashboard-ui/.nuxt/cache"}));
-storage.mount('data', unstorage_47drivers_47fs({"driver":"fs","base":"C:/Users/Ella Mae Lumawag/Downloads/io-t-dashboard-ui/.data/kv"}));
+storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"C:/Users/paeng/Desktop/iot-dashboard","watchOptions":{"ignored":[null]}}));
+storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"C:/Users/paeng/Desktop/iot-dashboard/server","watchOptions":{"ignored":[null]}}));
+storage.mount('cache:nuxt:payload', file_58_47_47_47C_58_47Users_47paeng_47Desktop_47iot_45dashboard_47node_modules_47_64nuxt_47nitro_45server_47dist_47runtime_47utils_47cache_45driver_46js({"driver":"file:///C:/Users/paeng/Desktop/iot-dashboard/node_modules/@nuxt/nitro-server/dist/runtime/utils/cache-driver.js","base":"C:/Users/paeng/Desktop/iot-dashboard/.nuxt/cache/nuxt/payload"}));
+storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"C:/Users/paeng/Desktop/iot-dashboard/.nuxt"}));
+storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"C:/Users/paeng/Desktop/iot-dashboard/.nuxt/cache"}));
+storage.mount('data', unstorage_47drivers_47fs({"driver":"fs","base":"C:/Users/paeng/Desktop/iot-dashboard/.data/kv"}));
 
 function useStorage(base = "") {
   return base ? prefixStorage(storage, base) : storage;
@@ -2400,13 +2394,13 @@ if (!window.__NUXT_DEVTOOLS_TIME_METRIC__) {
 window.__NUXT_DEVTOOLS_TIME_METRIC__.appInit = Date.now()
 `;
 
-const _W_D9Zi1M5t0q9t_nTH8TDaZJxms3RbB_87wT8wt9EY = (function(nitro) {
+const _HU8wPXGKku_iVTz6OuUr9MRRvaXHEC6nPTCCgmq4K4 = (function(nitro) {
   nitro.hooks.hook("render:html", (htmlContext) => {
     htmlContext.head.push(`<script>${script$1}<\/script>`);
   });
 });
 
-const rootDir = "C:/Users/Ella Mae Lumawag/Downloads/io-t-dashboard-ui";
+const rootDir = "C:/Users/paeng/Desktop/iot-dashboard";
 
 const appHead = {"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"}],"link":[],"style":[],"script":[],"noscript":[],"title":"IoT Dashboard"};
 
@@ -2436,7 +2430,7 @@ const asyncContext = getContext("nuxt-dev", {
 	asyncContext: true,
 	AsyncLocalStorage
 });
-const _x4O1xH2v3lfQAEkpp7_HExsCvw3YO0LB4guYRRYL68s = (nitroApp) => {
+const _nyjOdASwTicl2zof034G8g9EMbOVeCpuZHLuchQLe7g = (nitroApp) => {
 	const handler = nitroApp.h3App.handler;
 	nitroApp.h3App.handler = (event) => {
 		return asyncContext.callAsync({
@@ -2513,16 +2507,16 @@ function onConsoleLog(callback) {
 
 const script = "\"use strict\";(()=>{const t=window,e=document.documentElement,c=[\"dark\",\"light\"],n=getStorageValue(\"localStorage\",\"nuxt-color-mode\")||\"system\";let i=n===\"system\"?u():n;const r=e.getAttribute(\"data-color-mode-forced\");r&&(i=r),l(i),t[\"__NUXT_COLOR_MODE__\"]={preference:n,value:i,getColorScheme:u,addColorScheme:l,removeColorScheme:d};function l(o){const s=\"\"+o+\"\",a=\"\";e.classList?e.classList.add(s):e.className+=\" \"+s,a&&e.setAttribute(\"data-\"+a,o)}function d(o){const s=\"\"+o+\"\",a=\"\";e.classList?e.classList.remove(s):e.className=e.className.replace(new RegExp(s,\"g\"),\"\"),a&&e.removeAttribute(\"data-\"+a)}function f(o){return t.matchMedia(\"(prefers-color-scheme\"+o+\")\")}function u(){if(t.matchMedia&&f(\"\").media!==\"not all\"){for(const o of c)if(f(\":\"+o).matches)return o}return\"light\"}})();function getStorageValue(t,e){switch(t){case\"localStorage\":return window.localStorage.getItem(e);case\"sessionStorage\":return window.sessionStorage.getItem(e);case\"cookie\":return getCookie(e);default:return null}}function getCookie(t){const c=(\"; \"+window.document.cookie).split(\"; \"+t+\"=\");if(c.length===2)return c.pop()?.split(\";\").shift()}";
 
-const _feDUp_D5VAmanCJ6nklRJ5wZM1C213gooGp4JxFRdCs = (function(nitro) {
+const _s1AJavwsbWdoTr1tgXvTtcJcTIoHI23cGmxPY60zU = (function(nitro) {
   nitro.hooks.hook("render:html", (htmlContext) => {
     htmlContext.head.push(`<script>${script}<\/script>`);
   });
 });
 
 const plugins = [
-  _W_D9Zi1M5t0q9t_nTH8TDaZJxms3RbB_87wT8wt9EY,
-_x4O1xH2v3lfQAEkpp7_HExsCvw3YO0LB4guYRRYL68s,
-_feDUp_D5VAmanCJ6nklRJ5wZM1C213gooGp4JxFRdCs,
+  _HU8wPXGKku_iVTz6OuUr9MRRvaXHEC6nPTCCgmq4K4,
+_nyjOdASwTicl2zof034G8g9EMbOVeCpuZHLuchQLe7g,
+_s1AJavwsbWdoTr1tgXvTtcJcTIoHI23cGmxPY60zU,
 _wH6JrtIxmaSoA8lCPWFnE9z4lQeXW6H5z3l5aymEQw
 ];
 
@@ -2551,7 +2545,7 @@ function getAsset (id) {
 
 const METHODS = /* @__PURE__ */ new Set(["HEAD", "GET"]);
 const EncodingMap = { gzip: ".gz", br: ".br" };
-const _1A2pDl = eventHandler((event) => {
+const _R6MTll = eventHandler((event) => {
   if (event.method && !METHODS.has(event.method)) {
     return;
   }
@@ -2714,16 +2708,16 @@ function getInstallCommand(pkg) {
   if (ua.startsWith("bun")) return `bun add -D ${pkg}`;
   return `npm i -D ${pkg}`;
 }
-const _D7wyCs = defineCachedEventHandler(async (event) => {
+const _nFN6RH = defineCachedEventHandler(async (event) => {
   const options = useAppConfig().icon;
   const collectionName = event.context.params?.collection?.replace(/\.json$/, "");
   const collection = collectionName && Object.hasOwn(collections, collectionName) ? await collections[collectionName]?.() : null;
   const apiEndPoint = options.iconifyApiEndpoint || DEFAULT_ENDPOINT;
   const icons = String(parseQuery(parsePath(event.path).search).icons || "").split(",");
-  if (!collectionName) return createError$1({ status: 400, message: "No collection specified" });
-  if (!icons.length) return createError$1({ status: 400, message: "No icons specified" });
+  if (!collectionName) return createError({ status: 400, message: "No collection specified" });
+  if (!icons.length) return createError({ status: 400, message: "No icons specified" });
   if (!collection && true && !warnOnceSet.has(collectionName) && apiEndPoint === DEFAULT_ENDPOINT) {
-    consola$2.warn([
+    consola$1.warn([
       `[Icon] Collection \`${collectionName}\` is not found locally`,
       `We suggest to install it via \`${getInstallCommand(`@iconify-json/${collectionName}`)}\` to provide the best end-user experience.`
     ].join("\n"));
@@ -2734,27 +2728,27 @@ const _D7wyCs = defineCachedEventHandler(async (event) => {
       collection,
       icons
     );
-    consola$2.debug(`[Icon] serving ${icons.map((i) => "`" + collectionName + ":" + i + "`").join(",")} from bundled collection`);
+    consola$1.debug(`[Icon] serving ${icons.map((i) => "`" + collectionName + ":" + i + "`").join(",")} from bundled collection`);
     return data;
   }
   if (options.fallbackToApi === true || options.fallbackToApi === "server-only") {
     const apiUrl = new URL(`./${collectionName}.json?icons=${icons.join(",")}`, apiEndPoint);
-    consola$2.debug(`[Icon] fetching ${icons.map((i) => "`" + collectionName + ":" + i + "`").join(",")} from iconify api`);
+    consola$1.debug(`[Icon] fetching ${icons.map((i) => "`" + collectionName + ":" + i + "`").join(",")} from iconify api`);
     if (apiUrl.host !== new URL(apiEndPoint).host) {
-      return createError$1({ status: 400, message: "Invalid icon request" });
+      return createError({ status: 400, message: "Invalid icon request" });
     }
     try {
       const data = await $fetch(apiUrl.href);
       return data;
     } catch (e) {
-      consola$2.error(e);
+      consola$1.error(e);
       if (e.status === 404)
-        return createError$1({ status: 404 });
+        return createError({ status: 404 });
       else
-        return createError$1({ status: 500, message: "Failed to fetch fallback icon" });
+        return createError({ status: 500, message: "Failed to fetch fallback icon" });
     }
   }
-  return createError$1({ status: 404 });
+  return createError({ status: 404 });
 }, {
   group: "nuxt",
   name: "icon",
@@ -2803,7 +2797,7 @@ function filterIslandProps(props) {
   return out;
 }
 function computeIslandHash(name, filteredProps, context, source) {
-  return hash$2([name, filteredProps, context, source]).replace(/[-_]/g, "");
+  return hash$1([name, filteredProps, context, source]).replace(/[-_]/g, "");
 }
 
 const NUXT_PAYLOAD_INLINE = false;
@@ -3197,15 +3191,15 @@ async function getIslandContext(event) {
 	};
 }
 
-const _lazy_UlaX2l = () => Promise.resolve().then(function () { return renderer; });
+const _lazy_xeATpE = () => Promise.resolve().then(function () { return renderer; });
 
 const handlers = [
-  { route: '', handler: _1A2pDl, lazy: false, middleware: true, method: undefined },
-  { route: '/__nuxt_error', handler: _lazy_UlaX2l, lazy: true, middleware: false, method: undefined },
-  { route: '/api/_nuxt_icon/:collection', handler: _D7wyCs, lazy: false, middleware: false, method: undefined },
+  { route: '', handler: _R6MTll, lazy: false, middleware: true, method: undefined },
+  { route: '/__nuxt_error', handler: _lazy_xeATpE, lazy: true, middleware: false, method: undefined },
+  { route: '/api/_nuxt_icon/:collection', handler: _nFN6RH, lazy: false, middleware: false, method: undefined },
   { route: '/__nuxt_island/**', handler: handler$1, lazy: false, middleware: false, method: undefined },
-  { route: '/_fonts/**', handler: _lazy_UlaX2l, lazy: true, middleware: false, method: undefined },
-  { route: '/**', handler: _lazy_UlaX2l, lazy: true, middleware: false, method: undefined }
+  { route: '/_fonts/**', handler: _lazy_xeATpE, lazy: true, middleware: false, method: undefined },
+  { route: '/**', handler: _lazy_xeATpE, lazy: true, middleware: false, method: undefined }
 ];
 
 function createNitroApp() {

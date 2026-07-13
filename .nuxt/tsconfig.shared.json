@@ -2,10 +2,10 @@
   "compilerOptions": {
     "paths": {
       "vue-router": [
-        "../node_modules/.pnpm/vue-router@5.1.0_@vue+compi_695240e514db14bb8c87731e459732d8/node_modules/vue-router"
+        "../node_modules/nuxt/node_modules/vue-router"
       ],
       "nuxt": [
-        "../node_modules/.pnpm/nuxt@4.4.8_@babel+plugin-sy_bc86f4d8e896e64f1c81a79504eed152/node_modules/nuxt"
+        "../node_modules/nuxt"
       ],
       "@unhead/vue": [
         "../node_modules/@unhead/vue"
@@ -56,7 +56,7 @@
         "../node_modules/nitropack/runtime"
       ],
       "vue-router/auto-routes": [
-        "../node_modules/.pnpm/vue-router@5.1.0_@vue+compi_695240e514db14bb8c87731e459732d8/node_modules/vue-router/vue-router-auto-routes.d.mts"
+        "../node_modules/nuxt/node_modules/vue-router/vue-router-auto-routes.d.mts"
       ],
       "~": [
         "../app"
@@ -95,25 +95,25 @@
         "../server/*"
       ],
       "#app": [
-        "../node_modules/.pnpm/nuxt@4.4.8_@babel+plugin-sy_bc86f4d8e896e64f1c81a79504eed152/node_modules/nuxt/dist/app"
+        "../node_modules/nuxt/dist/app"
       ],
       "#app/*": [
-        "../node_modules/.pnpm/nuxt@4.4.8_@babel+plugin-sy_bc86f4d8e896e64f1c81a79504eed152/node_modules/nuxt/dist/app/*"
+        "../node_modules/nuxt/dist/app/*"
       ],
       "vue-demi": [
-        "../node_modules/.pnpm/nuxt@4.4.8_@babel+plugin-sy_bc86f4d8e896e64f1c81a79504eed152/node_modules/nuxt/dist/app/compat/vue-demi"
+        "../node_modules/nuxt/dist/app/compat/vue-demi"
       ],
       "#ui": [
-        "../node_modules/.pnpm/@nuxt+ui@4.8.2_@internation_8b16a24e5803aac6f0ff27c78b771e7b/node_modules/@nuxt/ui/dist/runtime"
+        "../node_modules/@nuxt/ui/dist/runtime"
       ],
       "#ui/*": [
-        "../node_modules/.pnpm/@nuxt+ui@4.8.2_@internation_8b16a24e5803aac6f0ff27c78b771e7b/node_modules/@nuxt/ui/dist/runtime/*"
+        "../node_modules/@nuxt/ui/dist/runtime/*"
       ],
       "#vue-router": [
-        "../node_modules/.pnpm/vue-router@5.1.0_@vue+compi_695240e514db14bb8c87731e459732d8/node_modules/vue-router"
+        "../node_modules/nuxt/node_modules/vue-router"
       ],
       "#unhead/composables": [
-        "../node_modules/.pnpm/nuxt@4.4.8_@babel+plugin-sy_bc86f4d8e896e64f1c81a79504eed152/node_modules/nuxt/dist/head/runtime/composables"
+        "../node_modules/nuxt/dist/head/runtime/composables"
       ],
       "#imports": [
         "./imports"
